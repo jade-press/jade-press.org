@@ -26,21 +26,6 @@ cssFolder = __dirname + '/public/css'
 
 }
 
-let config = {}
-let configPath = path.resolve(__dirname, 'gulp-config.js')
-
-try {
-
-	let res = fs.accessSync(configPath)
-	config = require(configPath)
-	console.log('gulp config loaded')
-	
-} catch(e) {
-	console.log(e.stack)
-	console.log('no gulp config')
-
-}
-
 gulp.task('stylus', function() {
 
 	gulp.src(cssFolder + '/*.styl')
