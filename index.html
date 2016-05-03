@@ -1,0 +1,52 @@
+<!DOCTYPE html><html>
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="x-ua-compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"  crossorigin="anonymous">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/css/tether-theme-arrows-dark.min.css"  crossorigin="anonymous">
+<link rel="stylesheet" href="http://jade-press.org/public/css/style.css?0.0.1" /><meta name="description" content="jade-press is a cms based on mongodb, nodejs..."><meta name="keywords" content="jade-press,nodejs,mongodb"><title>jadepress.org</title></head>
+<body><div id="wrapper"><div id="content" class="container"><div class="p-y-2 p-x-3"><div class="text-xs-center"><h1 class="display-3 p-y-3"><span class="icon-jadepress1"></span>jade-press</h1><p class="lead">cms based on mongodb, nodejs, koa, vue and more</p><hr class="m-y-2"><p class="lead"><a href="https://github.com/jade-press/jade-press" role="button" rel="external nofollow" target="_blank" class="btn btn-primary btn-lg"><span class="icon-github-circled-alt2"></span>github</a></p></div><div class="p-y-2"></div><p>try it</p><pre class="prettyprint lang-bash linenum linenums:1">#for mongodb driver ubuntu (optional)
+#sudo apt-get install libkrb5-dev
+#or visit https://github.com/mongodb/node-mongodb-native#troubleshooting for more
+
+#for canvas ubuntu (optional)
+#sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
+#visit https://www.npmjs.com/package/canvas for more platform
+
+git clone git@github.com:jade-press/jade-press.git
+cd jade-press
+npm install
+bower install
+cp config-sample.js config.js
+
+#then edit config.js yourself to config
+
+#install plugins
+gulp install
+
+#run it
+node app
+
+#then visit http://127.0.0.1:7200 (if use default setting)
+
+
+</pre><div class="p-y-2"></div><h2>features</h2><hr><ul><li class="p-b-1">based on mongodb(database and session), nodejs 4+, koa...</li><li class="p-b-1">built in jade(pug) editor</li><li class="p-b-1">file upload and insert</li><li class="p-b-1">custom routes</li><li class="p-b-1">plugin system</li><li class="p-b-1">theme system</li><li class="p-b-1">user system</li><li class="p-b-1">user groups and custom access control based on url</li><li class="p-b-1">post and category</li><li class="p-b-1">custom style & script for every post</li><li class="p-b-1">can be used as a module to extend</li></ul><div class="p-y-2"></div><h2>use jade-press as a example</h2><hr><p>visit <a href="https://github.com/jade-press/blog.jade-press.org" rel="external nofollow" target="_blank">https://github.com/jade-press/blog.jade-press.org </a>as a example</p><div class="p-y-3"></div><div class="p-y-3"></div><div class="p-y-3"></div><footer id="footer"><hr><p>&copy; 2016 
+by  <a href="http://html5beta.com" target="_blank">ZHAO Xudong</a></p></footer></div></div></div><script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.min.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script><script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script><script>;(function() {
+	
+	prettyPrint()
+
+	function checkNavBar() {
+		//collapse button
+		if(!$('.navbar-toggler').is(':visible')) $('#menus').addClass('in')
+		else $('#menus').removeClass('in')
+	}
+
+	//resize
+	$(window).on('resize', checkNavBar)
+
+	checkNavBar()
+
+
+
+})()</script></body></html>

@@ -5,7 +5,6 @@
 
 # config etc
 .idea/
-/config.js
 /temp/
 
 # Runtime data

@@ -8,6 +8,7 @@ ugly = require('gulp-uglify')
 ,plumber = require('gulp-plumber')
 ,newer = require('gulp-newer')
 ,stylus = require('gulp-stylus')
+,jade = require('gulp-jade')
 ,concat = require('gulp-concat')
 ,rename = require('gulp-rename')
 ,runSequence = require('run-sequence')
@@ -18,7 +19,7 @@ ugly = require('gulp-uglify')
 let
 cssFolder = __dirname + '/public/css'
 ,jsFolder = __dirname + '/public/js'
-
+,views = __dirname + '/views'
 ,stylusOptions = {
 	compress: true
 }
@@ -62,6 +63,21 @@ gulp.task('ugly', function() {
 
 })
 
+let config = require('./config')
+let pack = require('./package.json')
+config.version = pack.version
+
+gulp.task('jade', function() {
+
+	gulp.src(views + '/*.jade')
+		.pipe(plumber())
+		.pipe(jade({
+			locals: config
+		}))
+		.pipe(gulp.dest(__dirname))
+
+})
+
 gulp.task('watch',  function () {
 
 	watch(cssFolder, function() {
@@ -72,6 +88,15 @@ gulp.task('watch',  function () {
 		runSequence('ugly')
 	})
 
+	watch(
+		[
+			views + '/*.jade'
+			,views + '/parts/*.jade'
+		]
+	,function() {
+		runSequence('jade')
+	})
+
 })
 
 
@@ -79,5 +104,5 @@ gulp.task('watch',  function () {
 
 gulp.task('default', ['watch'])
 gulp.task('dist', function() {
-	runSequence('stylus', 'ugly')
+	runSequence('stylus', 'ugly', 'jade')
 })
