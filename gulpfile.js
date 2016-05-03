@@ -65,7 +65,9 @@ gulp.task('ugly', function() {
 
 let config = require('./config')
 let pack = require('./package.json')
+let packj = require('./node_modules/jade-press/package.json')
 config.version = pack.version
+config.siteDesc = packj.description
 
 gulp.task('jade', function() {
 
@@ -88,14 +90,13 @@ gulp.task('watch',  function () {
 		runSequence('ugly')
 	})
 
-	watch(
-		[
+	watch([
 			views + '/*.jade'
 			,views + '/parts/*.jade'
-		]
-	,function() {
-		runSequence('jade')
-	})
+		], function() {
+			runSequence('jade')
+		}
+	)
 
 })
 
