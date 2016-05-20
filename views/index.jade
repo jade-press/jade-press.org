@@ -31,18 +31,11 @@ include parts/head2
 			h3.text-xs-center try it
 			hr
 			pre.prettyprint.lang-bash.
-				#install mongodb if needed(ubuntu14.04)
-				# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-				# echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-				# sudo apt-get install -y mongodb-org
+				# make sure your mongodb running
+				# visit https://www.mongodb.com/download-center?jmp=nav#community for more info
 
-				#for mongodb driver ubuntu (optional)
-				#sudo apt-get install libkrb5-dev
-				#or visit https://github.com/mongodb/node-mongodb-native#troubleshooting for more
-
-				#for canvas ubuntu (optional)
-				#sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
-				#visit https://www.npmjs.com/package/canvas for more platform
+				# make sure cairo installed,
+				# visit https://github.com/Automattic/node-canvas/wiki/_pages for system spec
 
 				git clone git@github.com:jade-press/jade-press.git
 				cd jade-press
@@ -50,12 +43,12 @@ include parts/head2
 				bower install
 				cp config-sample.js config.js
 
-				#then edit config.js yourself to config
+				# read and edit config.js to define all the settings 
 
-				#install plugins
+				# install plugins if have plugins
 				gulp install
 
-				#run it
+				# run it
 				node app
 
 				#then visit http://127.0.0.1:7200 (if use default setting)
@@ -67,7 +60,7 @@ include parts/head2
 			h2 features
 			hr
 			ul
-				li.p-b-1 based on mongodb(database and session), nodejs 5+, koa...
+				li.p-b-1 based on mongodb(database and session), nodejs 5+, koa, vue...
 				li.p-b-1 built in jade(pug) editor
 				li.p-b-1 file upload (to mongodb gridfs), insert, manage
 				li.p-b-1 custom routes
@@ -83,26 +76,67 @@ include parts/head2
 
 			h2 use jade-press as a module
 			hr
+			pre.prettyprint.lang-javascript.
+				//config.js
+
+				//.... other setting
+				    ,theme: {
+				        path: __dirname
+				        ,name: 'your-name'
+				        ,version: 'xx.xx.xx'
+				    }
+				//.... other setting
+
+			pre.prettyprint.lang-javascript.
+				//app.js
+
+				/*!
+				 * main entrance
+				**/
+
+				'use strict'
+
+				let init = require('jade-press').init
+				,co = require('co')
+				,config = require('./config')
+
+				co(function() {
+
+				    let app = init(config)
+				    let port = config.local.port
+
+				    app.listen(port, '127.0.0.1', function() {
+				        console.log('' + new Date(), config.local.siteName, 'runs on port', port)
+				    })
+
+				}).catch(function(err) {
+				    console.error(err.stack || err)
+				})
+
 			p
+				|example: 
 				a(href='https://github.com/jade-press/blog.jade-press.org', rel='external nofollow', target='_blank') https://github.com/jade-press/blog.jade-press.org 
 
-			h2 example theme
+			.p-y-2
+			h2 theme
 			hr
 			p
+				|example: 
 				a(href='https://github.com/jade-press/jadepress-theme-pi', rel='external nofollow', target='_blank') https://github.com/jade-press/jadepress-theme-pi
 
-			h2 example plugin
+			.p-y-2
+			h2 plugin
 			hr
 			p
+				|example: 
 				a(href='https://github.com/jade-press/jadepress-plugin-qr', rel='external nofollow', target='_blank') https://github.com/jade-press/jadepress-plugin-qr
 
+			.p-y-2
 			h2 license
 			hr
 			p MIT
 
 
-			.p-y-3
-			.p-y-3
 			.p-y-3
 
 			include parts/footer-html
