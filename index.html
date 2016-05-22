@@ -56,18 +56,16 @@ let init = require('jade-press').init
 ,co = require('co')
 ,config = require('./config')
 
-co(function() {
-
-    let app = init(config)
+co(init(config))
+.then(function(app) {
     let port = config.local.port
-
     app.listen(port, '127.0.0.1', function() {
         console.log('' + new Date(), config.local.siteName, 'runs on port', port)
     })
-
-}).catch(function(err) {
+}, function(err) {
     console.error(err.stack || err)
 })
+
 </pre><p>example: <a href="https://github.com/jade-press/blog.jade-press.org" rel="external nofollow" target="_blank">https://github.com/jade-press/blog.jade-press.org </a></p><div class="p-y-2"></div><h2>theme</h2><hr><p>example: <a href="https://github.com/jade-press/jadepress-theme-pi" rel="external nofollow" target="_blank">https://github.com/jade-press/jadepress-theme-pi</a></p><div class="p-y-2"></div><h2>plugin</h2><hr><p>example: <a href="https://github.com/jade-press/jadepress-plugin-qr" rel="external nofollow" target="_blank">https://github.com/jade-press/jadepress-plugin-qr</a></p><div class="p-y-2"></div><h2>license</h2><hr><p>MIT</p><div class="p-y-3"></div><footer id="footer"><hr><p>&copy; 2016 
 by  <a href="http://html5beta.com" target="_blank">ZHAO Xudong</a></p></footer></div></div></div><script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.min.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script><script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script><script>;(function() {
 	

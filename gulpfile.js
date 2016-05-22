@@ -15,6 +15,7 @@ ugly = require('gulp-uglify')
 ,_ = require('lodash')
 ,path = require('path')
 ,fs = require('fs')
+,spawn = require('cross-spawn')
 
 let
 cssFolder = __dirname + '/public/css'
@@ -81,8 +82,28 @@ gulp.task('jade', function() {
 
 })
 
+ 
+gulp.task('server', function (cb) {
+	var runner = spawn(
+		'node'
+		,['server']
+		,{
+			stdio: 'inherit'
+		}
+	)
+
+	runner.on('exit', function (code) {
+		process.exit(code)
+	})
+
+	runner.on('error', function (err) {
+		cb(err)
+	})
+})
+
 gulp.task('watch',  function () {
 
+	runSequence('server')
 	watch([cssFolder + '/*.styl', cssFolder + '/parts/*.styl'], function() {
 		runSequence('stylus')
 	})
